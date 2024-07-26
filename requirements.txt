@@ -1,0 +1,8 @@
+Python==3.12
+CSS==CSS3
+streamlit==1.36.0
+clipboard==0.0.4
+pyglet==2.0.16
+gTTS==2.5.2
+deep-translator==1.11.4
+streamlit-star-ratings==0.0.1
