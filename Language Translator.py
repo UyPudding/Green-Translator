@@ -11,7 +11,7 @@ from time import sleep
 
 st.set_page_config(
     page_title='Green Translator - Free Online Translator',
-    page_icon='📗'
+    page_icon='translator.png'
 )
 
 
