@@ -15,7 +15,7 @@ st.set_page_config(
 )
 
 
-st.markdown(f"<style>{open('language style.css').read()}</style>",unsafe_allow_html=True)   # CSS Style
+st.markdown(f"<style>{open('style.css').read()}</style>",unsafe_allow_html=True)   # CSS Style
 
 ## Session States ##
 if 'star' not in st.session_state:
