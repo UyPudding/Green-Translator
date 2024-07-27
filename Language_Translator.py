@@ -124,7 +124,7 @@ file_uploader=st.file_uploader(label='**Upload a TXT File**',type=['txt'])
 if file_uploader is not None:
     replace_file_text()
 
-col1,col2,col3,col4=st.columns([1,1,1]) # Four st.button on same line
+col1,col2,col3=st.columns([1,1,1]) # Four st.button on same line
 with col1:   # Clear input text area Button
    clear_button=st.button(label='Clear',type='secondary',on_click=clear_text)
 with col2:   # Translate input text area Button
