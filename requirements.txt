@@ -1,5 +1,4 @@
-Python==3.12
-CSS==CSS3
+Python==3.12.4
 streamlit==1.36.0
 clipboard==0.0.4
 pyglet==2.0.16
