@@ -1,10 +1,5 @@
 import streamlit as st  # pip install streamlit
-import clipboard        # pip install clipboard
-import pyglet           # pip install pyglet
-from gtts import gTTS   # pip install gTTS
 from deep_translator import GoogleTranslator      # pip install -U deep-translator
-import gtts.lang  # Get gTTS Language Codes
-from io import BytesIO
 from time import sleep 
 
 
@@ -17,9 +12,6 @@ st.set_page_config(
 st.markdown(f"<style>{open('style.css').read()}</style>",unsafe_allow_html=True)   # CSS Style
 
 ## Session States ##
-if 'star' not in st.session_state:
-    st.session_state.star=None     # For st_star_rating
-
 if 'translate' not in st.session_state:
     st.session_state.translate=[]  # For Translation
 
@@ -132,14 +124,12 @@ file_uploader=st.file_uploader(label='**Upload a TXT File**',type=['txt'])
 if file_uploader is not None:
     replace_file_text()
 
-col1,col2,col3,col4=st.columns([1,1,1,1]) # Four st.button on same line
-with col1:   # Voice speaker input Button
-   voice_speaker_button_input=st.button(label='🔊',type='primary')
-with col2:   # Clear input text area Button
+col1,col2,col3,col4=st.columns([1,1,1]) # Four st.button on same line
+with col1:   # Clear input text area Button
    clear_button=st.button(label='Clear',type='secondary',on_click=clear_text)
-with col3:   # Translate input text area Button
+with col2:   # Translate input text area Button
    translate_button=st.button(label='Translate',type='secondary')
-with col4:   # Swap input & output Value
+with col3:   # Swap input & output Value
     swap_value=st.button(label='🔁',on_click=swap_textarea,type='primary')
 
 # Select output language
@@ -152,19 +142,6 @@ target_output=st.selectbox(label='**Output Language**',
 keep_input=st.session_state.input    # Keep st.session_state.input Value
 keep_output=st.session_state.output  # Keep st.session_state.output Value
 
-if voice_speaker_button_input:  # Voice speaker input system
-    mp3_fp_input=BytesIO()  # Keep input Voice
-    try:
-       input_voice=gTTS(text=text_area,
-                        lang=list(gtts.lang.tts_langs().keys())[list(gtts.lang.tts_langs().values()).index(st.session_state.input)],
-                        slow=False)
-       input_voice.write_to_fp(mp3_fp_input)
-       mp3_fp_input.seek(0)
-       play_sound=pyglet.media.load(None,file=mp3_fp_input,streaming=False)
-       play_sound.play()
-       pyglet.app.run()
-    except RuntimeError:  # Handling RuntimeError
-        pass
 
 if translate_button:  # Translate Button system
     translator()  # Call function to translate input text area
@@ -172,27 +149,3 @@ if translate_button:  # Translate Button system
 # Translation text area
 st.html(f"""
         <textarea class='disable_textarea' name='Translation' placeholder='Translation'>{"".join(st.session_state.translate)}</textarea>""")
-
-col5,col6=st.columns([1,1])  # Two st.button on same line
-with col5:  # Voice speaker output Button
-   voice_speaker_button_output=st.button(label='🔊',type='primary',key='count') # Key='count' to avoid WidgetID Error
-with col6:  # Copy Button
-   clipboard_button=st.button(label='📋',type='primary')
-
-if clipboard_button:  # Copy system
-    clipboard.copy("".join(st.session_state.translate))
-    st.toast(body='Copied!',icon='✅')
-
-if voice_speaker_button_output:  # Voice speaker output system
-    mp3_fp_output=BytesIO()  # Keep output Voice
-    try:
-       input_voice=gTTS(text=f'{"".join(st.session_state.translate)}',
-                        lang=list(gtts.lang.tts_langs().keys())[list(gtts.lang.tts_langs().values()).index(st.session_state.output)],
-                        slow=False)
-       input_voice.write_to_fp(mp3_fp_output)
-       mp3_fp_output.seek(0)
-       play_sound=pyglet.media.load(None,file=mp3_fp_output,streaming=False)
-       play_sound.play()
-       pyglet.app.run()
-    except RuntimeError:  # Handling RuntimeError
-        pass
