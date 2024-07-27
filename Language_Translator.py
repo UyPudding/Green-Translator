@@ -3,7 +3,6 @@ import clipboard        # pip install clipboard
 import pyglet           # pip install pyglet
 from gtts import gTTS   # pip install gTTS
 from deep_translator import GoogleTranslator      # pip install -U deep-translator
-from streamlit_star_rating import st_star_rating  # pip install st-star-rating
 import gtts.lang  # Get gTTS Language Codes
 from io import BytesIO
 from time import sleep 
@@ -49,15 +48,6 @@ with st.sidebar:
     st.markdown(f'''<p>•  Default Color: <b>#FFFFFF</b><br>
              •  Current Color: <b>{background_color.upper()}</b></p>''',unsafe_allow_html=True)
     st.divider()
-
-    # Rating
-    st.markdown('<div style="color:#3EDC07;text-align:center;font-size:32px;"><b>Rating</b></div>',unsafe_allow_html=True)
-
-    rating=st_star_rating(label='Rate this Web App',maxValue=5,defaultValue=0,size=25,resetButton=True,key='star')
-
-    if st.session_state.star is not None:
-        st.write(f'You have rated <span style="color:#ffc043"><b>{st.session_state.star} Stars!</b></span>',unsafe_allow_html=True)
-        st.success('**Thanks For Rating!**')
 
 
 
