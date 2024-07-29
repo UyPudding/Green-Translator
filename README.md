@@ -50,7 +50,7 @@ _<p align='center'>Curated List of UyPudding's repository</p>_
 **Star my Repository** &nbsp; [![Star](https://img.shields.io/github/stars/UyPudding/Green-Translator.svg?logo=github&style=social)](https://gitHub.com/UyPudding/Green-Translator)
 
 ## Feedback
-**Reach out to me at** 
+**Reach out to me at** <https://discuss.streamlit.io/t/green-translator-free-online-translator/75990>
 
 ## About Streamlit
 **Official:**  _<https://streamlit.io/>_<br>
